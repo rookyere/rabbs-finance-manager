@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="pagetitle">
+  <h1>Manage Income</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+      <li class="breadcrumb-item active"><a href="{% url 'income' %}">Income</a></li>
+    </ol>
+  </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="card">
+        {% include 'messages.html' %}
+        <div class="card-body">
+          <h5 class="card-title">{{action}} Income</h5>
+          <!-- <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p> -->
+          <form class="row g-3 needs-validation" method='POST'>
+            {% csrf_token %}
+            <div class="col-md-6">
+              <label class="form-label"><strong>{{form.income_source.label_tag}}</strong></label>
+              {{form.income_source}}
+              <small class="text-danger">{{form.income_source.errors}}</small>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label"><strong>{{form.description.label_tag}}</strong></label>
+              {{form.description}}
+              <small class="text-danger">{{form.description.errors}}</small>
+            </div>
+            <div class="col-6">
+              <label class="form-label"><strong>{{form.amount.label_tag}}</strong></label>
+             {{form.amount}}
+             <small class="text-danger">{{form.amount.errors}}</small>
+            </div>
+            <div class="col-6">
+              <label class="form-label"><strong>{{form.income_date.label_tag}}</strong></label>
+              {{form.income_date}}
+              <small class="text-danger">{{form.income_date.errors}}</small>
+            </div>
+                    
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <a href="{% url cancel_url %}"><button type="button" class="btn btn-primary">Cancel</button></a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Income</h5>
+          <table class="table table-striped table-hover " id="table-id">
+            <thead>
+              <tr>
+                {% comment %} <th scope="col">#</th> {% endcomment %}
+                <th scope="col">Date</th>
+                <th scope="col">Description</th>
+                <th scope="col">Income Type</th>
+                <th scope="col">Amount (GHS)</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              {% for item_income in income_list %}
+                <tr>
+                  <td>{{item_income.income_date}}</td>
+                  <td>{{item_income.description}}</td>
+                  <td>{{item_income.income_source}}</td>
+                  <td>{{item_income.amount}}</td>
+                  <td>
+                    <a href="{% url 'update_income_item' item_income.id %}">Edit</a>
+                    <a href="{% url 'delete_income_item' item_income.id %}"><span class='text-danger'>Delete</span></a>
+                  </td>
+                  
+                </tr>
+              {% endfor %}
+             
+            </tbody>
+          </table>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              {% if income_list.has_previous %}
+              <li class="page-item"><a class="page-link" href="?page=1">&laquo First</a></li>
+              <li class="page-item"><a class="page-link" href="?page={{income_list.previous_page_number}}">Previous</a></li>
+              {% endif %}
+    
+              <li class="page-item disabled"><a class="page-link" href="#">Page {{income_list.number}} of {{income_list.paginator.num_pages}}</a></li>
+    
+              {% if income_list.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{income_list.next_page_number}}">Next</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{income_list.paginator.num_pages}}">Last &raquo</a></li>
+              {% endif %}
+             
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    
+
+    </div>
+  </div>
+</section>
+{% endblock %}

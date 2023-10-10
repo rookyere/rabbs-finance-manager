@@ -1,0 +1,16 @@
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+      {% if cat_list.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page=1">&laquo First</a></li>
+      <li class="page-item"><a class="page-link" href="?page={{cat_list.previous_page_number}}">Previous</a></li>
+      {% endif %}
+
+      <li class="page-item disabled"><a class="page-link" href="#">Page {{cat_list.number}} of {{cat_list.paginator.num_pages}}</a></li>
+
+      {% if cat_list.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{cat_list.next_page_number}}">Next</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{cat_list.paginator.num_pages}}">Last &raquo</a></li>
+      {% endif %}
+     
+    </ul>
+  </nav>
