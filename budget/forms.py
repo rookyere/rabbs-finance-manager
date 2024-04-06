@@ -7,20 +7,9 @@ import re
 
 
 class budgetItemForm(ModelForm):
-    # def __ini__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     initial_choice = [('', 'Select source of expense')]
-
-    #     expense_sources = expenseType.objects.values_list('expense_source',flat=True).distinct()
-    #     source_choices = [(expense_source, expense_source) for expense_source in expense_sources]
-
-    #     expense_sources_choices = initial_choice + source_choices
-
-    #     self.fields['expense_source'].choices = expense_sources_choices
-
     class Meta:
         model = BudgetExpense
-        fields = ["est_expense_source", "est_description", "est_amount", "est_expense_date", "is_completed"]
+        fields = ["est_expense_source", "est_description", "est_amount", "est_expense_date", "est_status"]
 
         widgets = {
             "est_expense_source": forms.Select(attrs={"class": "form-select"}),
@@ -34,6 +23,7 @@ class budgetItemForm(ModelForm):
             "est_expense_date": forms.DateInput(
                 attrs={"type": "date", "class": "form-control"}
             ),
+            "est_status": forms.Select(attrs={"class": "form-select"})
         }
 
     # def clean_est_expense_date(self):

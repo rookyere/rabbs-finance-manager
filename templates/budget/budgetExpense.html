@@ -40,6 +40,11 @@
               {{form.est_expense_date}}
               <small class="text-danger">{{form.est_expense_date.errors}}</small>
             </div>
+            <div class="col-6">
+              <label class="form-label"><strong>{{form.est_status.label_tag}}</strong></label>
+              {{form.est_status}}
+              <small class="text-danger">{{form.est_status.errors}}</small>
+            </div>
                     
             <div class="col-12">
               <button type="submit" class="btn btn-primary">Submit</button>
@@ -68,17 +73,12 @@
             </thead>
             <tbody>
               {% for item_budget in expense_list %}
-              <tr>
+              <tr {% if item_budget.est_status == "Completed" %} class='table-success'{% endif %}>
                 <td>{{item_budget.est_expense_date}}</td>
                 <td>{{item_budget.est_description}}</td>
                 <td>{{item_budget.est_expense_source}}</td>
                 <td>{{item_budget.est_amount}}</td>
-                <td>
-                  <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="customCheck1">
-                    <label class="custom-control-label" for="customCheck1"></label>
-                </div>
-              </td>
+                <td>{{item_budget.est_status}}</td>
                 <td>
                   <a href="{% url 'update_budget_item' item_budget.id %}">Edit</a>
                   <a href="{% url 'delete_budget_item' item_budget.id %}"><span class='text-danger'>Delete</span></a>
