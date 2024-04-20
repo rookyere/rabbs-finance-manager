@@ -3,3 +3,4 @@ db*
 *bkp*
 *.sql
 Pip*
+*_pycache__*
