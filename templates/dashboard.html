@@ -17,228 +17,271 @@
       <!-- Left side columns -->
       <div class="col-lg-12">
         <div class="row">
+          <div class="row" style="background-color: antiquewhite;">
+            <!-- <div class="col-xxl-12 col-md-6">
+              <p></p>
+            </div> -->
+            <form action="" method="POST" class="row g-3 needs-validation">
+              {% csrf_token %}
+              <div class="input-group mb-3" style="margin-top: 10px;">
+                <!-- <div class="input-group-prepend">
+                  <label class="input-group-text fw-bold" for="inputGroupSelect01">Month:</label>
+                </div>
+                <select name="months" class="custom-select col-md-3" id="inputGroupSelect01" style="margin-right: 10px;">
+                  <option disabled="true" selected>Choose...</option>
+                  <option value="1">January</option>
+                  <option value="2">February</option>
+                  <option value="3">March</option>
+                  <option value="3">April</option>
+                  <option value="3">May</option>
+                  <option value="3">June</option>
+                  <option value="3">July</option>
+                  <option value="3">August</option>
+                  <option value="3">September</option>
+                  <option value="3">October</option>
+                  <option value="3">November</option>
+                  <option value="3">December</option>
+                </select> -->
 
-          <!-- Income Balance | This Month -->
-          <div class="col-xxl-4 col-md-6">
-            <div class="card info-card sales-card">
+                <div class="input-group-prepend">
+                  <label class="input-group-text fw-bold" for="inputGroupSelect02">Period:</label>
+                </div>
+                <input type="month" class="col-md-3" name="period">
+                <!-- <select name="years" class="custom-select col-md-3" id="inputGroupSelect02" style="margin-right: 10px;">
+                  <option selected>Choose...</option>
+                  <option value="1">2024</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select> -->
 
-              <div class="card-body">
-                <h5 class="card-title"> Bal: Income <span class="text-muted small pt-2 ps-1">| {{this_month}}</span></h5>
-
-                
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    {% if month_income_bal < 0 %} <span class="text-danger"><b>Gh&#8373;</b></span> {%else%} <b>Gh&#8373;</b> {%endif%}
-                  </div>
-                  <div class="ps-3">
-                    {% if month_income_bal < 0 %} <h6><span class="text-danger">{{month_income_bal}}</span></h6> {%else%} <h6>{{month_income_bal}}</h6> {%endif%}
-                    <!-- <span class="text-success small pt-1 fw-bold">12%</span> 
-                    <span class="text-muted small pt-2 ps-1">increase in</span> -->
-                    <!-- <span class="text-muted small pt-2 ps-1">August</span> -->
-
-                  </div>
+                <div class="input-group-append">
+                  <button type="submit" class="btn btn-secondary">Filter</button>
                 </div>
               </div>
+            </form>
+            
+          
+            <!-- Income Balance | This Month -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card sales-card">
 
-            </div>
-          </div><!--End Bal | Expense Budget -->
+                <div class="card-body">
+                  <h5 class="card-title"> Bal: Income <span class="text-muted small pt-2 ps-1">| {{p_month}}</span></h5>
 
-          <!-- Total Expense | This Month-->
-          <div class="col-xxl-4 col-md-6">
-            <div class="card info-card sales-card">
+                  
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      {% if month_income_bal < 0 %} <span class="text-danger"><b>Gh&#8373;</b></span> {%else%} <b>Gh&#8373;</b> {%endif%}
+                    </div>
+                    <div class="ps-3">
+                      {% if month_income_bal < 0 %} <h6><span class="text-danger">{{month_income_bal}}</span></h6> {%else%} <h6>{{month_income_bal}}</h6> {%endif%}
+                      <!-- <span class="text-success small pt-1 fw-bold">12%</span> 
+                      <span class="text-muted small pt-2 ps-1">increase in</span> -->
+                      <!-- <span class="text-muted small pt-2 ps-1">August</span> -->
 
-              <div class="card-body">
-                <h5 class="card-title"> Total Expense <span class="text-muted small pt-2 ps-1">| {{this_month}}</span></h5>
-
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <b>Gh&#8373;</b>
-                  </div>
-                  <div class="ps-3">
-                    <h6>
-                      {{total_expense_this_month}}
-                      <!-- {% if this_month_expense_amount.value %} 
-                      {{this_month_expense_amount.value}} 
-                    {%else%} 0
-                    {%endif%}   -->
-                    </h6>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div><!-- End Total Expense | This Month -->
-
-          <!-- Total Income | This Month -->
-          <div class="col-xxl-4 col-md-6">
-            <div class="card info-card sales-card">
-
-              <div class="card-body">
-                <h5 class="card-title"> Total Income <span class="text-muted small pt-2 ps-1">| {{this_month}}</span></h5>
-
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <b>Gh&#8373;</b>
-                  </div>
-                  <div class="ps-3">
-                    <h6>
-                      {{total_income_this_month}} 
-                      <!-- {% if this_month_income_amount.value %} 
-                        {{this_month_income_amount.value}} 
-                      {%else%} 0 
-                      {%endif%} -->
-
-                    </h6>
-                    <!-- <span class="text-success small pt-1 fw-bold">12%</span> 
-                    <span class="text-muted small pt-2 ps-1">increase in</span> -->
-                    <!-- <span class="text-muted small pt-2 ps-1">August</span> -->
-
+                    </div>
                   </div>
                 </div>
+
               </div>
+            </div><!--End Bal | Expense Budget -->
 
-            </div>
-          </div><!-- End Total Income | This Month -->
+            <!-- Total Expense | This Month-->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card sales-card">
 
-          <!-- Income Balance | This Year -->
-          <div class="col-xxl-4 col-lg-6">
-            <div class="card info-card sales-card">
+                <div class="card-body">
+                  <h5 class="card-title"> Total Expense <span class="text-muted small pt-2 ps-1">| {{p_month}}</span></h5>
 
-              <div class="card-body">
-                <h5 class="card-title"> Bal: Income <span>| <span class="text-muted small pt-2 ps-1">{{this_year}}</span></span></h5>
-                
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <b>Gh&#8373;</b>
-                  </div>
-                  <div class="ps-3">
-                    <h6>{{year_income_bal}}</h6>
-                    <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
-
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <b>Gh&#8373;</b>
+                    </div>
+                    <div class="ps-3">
+                      <h6>
+                        {{total_expense_p_month}}
+                        <!-- {% if p_month_expense_amount.value %} 
+                        {{p_month_expense_amount.value}} 
+                      {%else%} 0
+                      {%endif%}   -->
+                      </h6>
+                    </div>
                   </div>
                 </div>
+
               </div>
+            </div><!-- End Total Expense | This Month -->
 
-            </div>
-          </div><!-- End Bal | Year Income -->
+            <!-- Total Income | This Month -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card sales-card">
 
-          <!-- Total Expense | This Year-->
-          <div class="col-xxl-4 col-md-6">
-            <div class="card info-card sales-card">
+                <div class="card-body">
+                  <h5 class="card-title"> Total Income <span class="text-muted small pt-2 ps-1">| {{p_month}}</span></h5>
 
-              <div class="card-body">
-                <h5 class="card-title"> Total Expense <span class="text-muted small pt-2 ps-1">| {{this_year}}</span></h5>
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <b>Gh&#8373;</b>
+                    </div>
+                    <div class="ps-3">
+                      <h6>
+                        {{total_income_p_month}} 
+                        <!-- {% if p_month_income_amount.value %} 
+                          {{p_month_income_amount.value}} 
+                        {%else%} 0 
+                        {%endif%} -->
 
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <b>Gh&#8373;</b>
-                  </div>
-                  <div class="ps-3">
-                    <h6>
-                      {{total_expense_this_year}}
-                      <!-- {% if this_month_expense_amount.value %} 
-                      {{this_month_expense_amount.value}} 
-                    {%else%} 0
-                    {%endif%}   -->
-                    </h6>
+                      </h6>
+                      <!-- <span class="text-success small pt-1 fw-bold">12%</span> 
+                      <span class="text-muted small pt-2 ps-1">increase in</span> -->
+                      <!-- <span class="text-muted small pt-2 ps-1">August</span> -->
+
+                    </div>
                   </div>
                 </div>
+
               </div>
+            </div><!-- End Total Income | This Month -->
 
-            </div>
-          </div><!-- End Total Expense | This Month -->
-    
-          <!-- Total Income | This Year -->
-          <div class="col-xxl-4 col-lg-6">
-            <div class="card info-card sales-card">
+            <!-- Income Balance | This Year -->
+            <div class="col-xxl-4 col-lg-6">
+              <div class="card info-card sales-card">
 
-              <div class="card-body">
-                <h5 class="card-title"> Total Income <span>| <span class="text-muted small pt-2 ps-1">{{this_year}}</span></span></h5>
-                
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <b>Gh&#8373;</b>
-                  </div>
-                  <div class="ps-3">
-                    <h6>{{total_income_this_year}}</h6>
-                    <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
+                <div class="card-body">
+                  <h5 class="card-title"> Bal: Income <span>| <span class="text-muted small pt-2 ps-1">{{p_year}}</span></span></h5>
+                  
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <b>Gh&#8373;</b>
+                    </div>
+                    <div class="ps-3">
+                      <h6>{{year_income_bal}}</h6>
+                      <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
 
+                    </div>
                   </div>
                 </div>
+
               </div>
+            </div><!-- End Bal | Year Income -->
 
-            </div>
-          </div><!-- End Bal | Year Income -->
+            <!-- Total Expense | This Year-->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card sales-card">
 
-           <!-- Bal: After Budgeted Expense | This Month -->
-           <div class="col-xxl-4 col-md-6">
-            <div class="card info-card sales-card">
+                <div class="card-body">
+                  <h5 class="card-title"> Total Expense <span class="text-muted small pt-2 ps-1">| {{p_year}}</span></h5>
 
-              <div class="card-body">
-                <h5 class="card-title"> Bal: After Budgeted Expense <span class="text-muted small pt-2 ps-1">| {{this_month}}</span></h5>
-
-                
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    {% if month_expense_budget_bal < 0 %} <span class="text-danger"><b>Gh&#8373;</b></span> {%else%} <b>Gh&#8373;</b> {%endif%}
-                  </div>
-                  <div class="ps-3">
-                    {% if month_expense_budget_bal < 0 %} <h6><span class="text-danger">{{month_expense_budget_bal}}</span></h6> {%else%} <h6>{{month_expense_budget_bal}}</h6> {%endif%}
-                    <!-- <span class="text-success small pt-1 fw-bold">12%</span> 
-                    <span class="text-muted small pt-2 ps-1">increase in</span> -->
-                    <!-- <span class="text-muted small pt-2 ps-1">August</span> -->
-
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <b>Gh&#8373;</b>
+                    </div>
+                    <div class="ps-3">
+                      <h6>
+                        {{total_expense_p_year}}
+                        <!-- {% if p_month_expense_amount.value %} 
+                        {{p_month_expense_amount.value}} 
+                      {%else%} 0
+                      {%endif%}   -->
+                      </h6>
+                    </div>
                   </div>
                 </div>
+
               </div>
+            </div><!-- End Total Expense | This Month -->
+      
+            <!-- Total Income | This Year -->
+            <div class="col-xxl-4 col-lg-6">
+              <div class="card info-card sales-card">
 
-            </div>
-          </div><!--End Bal | Expense Budget -->
+                <div class="card-body">
+                  <h5 class="card-title"> Total Income <span>| <span class="text-muted small pt-2 ps-1">{{p_year}}</span></span></h5>
+                  
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <b>Gh&#8373;</b>
+                    </div>
+                    <div class="ps-3">
+                      <h6>{{total_income_p_year}}</h6>
+                      <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
 
-          <!-- Total Budgeted Expense | This Month -->
-          <div class="col-xxl-4 col-lg-6">
-            <div class="card info-card sales-card">
-
-              <div class="card-body">
-                <h5 class="card-title"> Total Budgeted Expense <span>| <span class="text-muted small pt-2 ps-1">{{this_month}}</span></span></h5>
-                
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <b>Gh&#8373;</b>
-                  </div>
-                  <div class="ps-3">
-                    <h6>{{total_bexpense_this_month}}</h6>
-                    <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
-
+                    </div>
                   </div>
                 </div>
+
               </div>
+            </div><!-- End Bal | Year Income -->
 
-            </div>
-          </div><!-- End Bal | Year Income -->
+            <!-- Bal: After Budgeted Expense | This Month -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card sales-card">
 
-          <!-- Total Expense | This Week-->
-          <div class="col-xxl-4 col-md-6">
-            <div class="card info-card sales-card">
+                <div class="card-body">
+                  <h5 class="card-title"> Bal: After Budgeted Expense <span class="text-muted small pt-2 ps-1">| {{p_month}}</span></h5>
 
-              <div class="card-body">
-                <h5 class="card-title"> Total Expense <span>| <span class="text-muted small pt-2 ps-1">This Week</span></span></h5>
+                  
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      {% if month_expense_budget_bal < 0 %} <span class="text-danger"><b>Gh&#8373;</b></span> {%else%} <b>Gh&#8373;</b> {%endif%}
+                    </div>
+                    <div class="ps-3">
+                      {% if month_expense_budget_bal < 0 %} <h6><span class="text-danger">{{month_expense_budget_bal}}</span></h6> {%else%} <h6>{{month_expense_budget_bal}}</h6> {%endif%}
+                      <!-- <span class="text-success small pt-1 fw-bold">12%</span> 
+                      <span class="text-muted small pt-2 ps-1">increase in</span> -->
+                      <!-- <span class="text-muted small pt-2 ps-1">August</span> -->
 
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <b>Gh&#8373;</b>
-                  </div>
-                  <div class="ps-">
-                    <h6>1000000.00</h6>
-                    <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
-
+                    </div>
                   </div>
                 </div>
+
               </div>
+            </div><!--End Bal | Expense Budget -->
 
-            </div>
-          </div><!-- End Total Expense| This Week-->
+            <!-- Total Budgeted Expense | This Month -->
+            <div class="col-xxl-4 col-lg-6">
+              <div class="card info-card sales-card">
 
+                <div class="card-body">
+                  <h5 class="card-title"> Total Budgeted Expense <span>| <span class="text-muted small pt-2 ps-1">{{p_month}}</span></span></h5>
+                  
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <b>Gh&#8373;</b>
+                    </div>
+                    <div class="ps-3">
+                      <h6>{{total_bexpense_p_month}}</h6>
+                      <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End Bal | Year Income -->
+
+            <!-- Total Expense | This Week-->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card sales-card">
+
+                <div class="card-body">
+                  <h5 class="card-title"> Total Expense <span>| <span class="text-muted small pt-2 ps-1">This Week</span></span></h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <b>Gh&#8373;</b>
+                    </div>
+                    <div class="ps-">
+                      <h6>1000000.00</h6>
+                      <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End Total Expense| This Week-->
+          </div>  
 
 
          

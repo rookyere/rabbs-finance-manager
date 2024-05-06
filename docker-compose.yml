@@ -6,12 +6,12 @@ services:
     container_name: fm_app
     build: .
     ports:
-      - 8001:8000
+      - 80:8000
     depends_on: 
       fm_db:
         condition: service_healthy
     networks:
-    - fm_net
+      - fm_net
   fm_db:
     container_name: fm_db
     image: mysql:latest
@@ -21,9 +21,11 @@ services:
       MYSQL_DATABASE: finance_manager_db
       MYSQL_USER: fm_user 
       MYSQL_PASSWORD: fm_user_pwd
-      MYSQL_ROOT_PASSWORD: rookyere
+      MYSQL_ROOT_PASSWORD: fm_db_admin
     networks:
       - fm_net
+    volumes:
+      - fm_db_data
     healthcheck:
       test: ["CMD-SHELL", "mysqladmin ping -h localhost -u fm_user -pfm_user_pwd"]
       interval: 10s
@@ -32,3 +34,8 @@ services:
 
 networks:
   fm_net:
+    name: fm_net
+
+volumes:
+  fm_db_data:
+    name: fm_db_data
